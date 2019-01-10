@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<link href="static/css/style.css" rel="stylesheet" type="text/css"/>
+<body>
+<a href="/index">返回首页</a>
+<form action="/Search_area" method="post">
+            <p>请输入cateId</p>
+            <input name="cateId" type="text" value="{{cateId}}">
+            <input type="submit" value="提交">
+</form>
+
+{%if IPS%}
+    <form action="/extract_Search_area" method="post">
+    {%for data in IPS%}
+        <p>{{data}}</p>
+        <a target="_blank" href="{{IPS[data]}}"><p>跳转链接</p></a>
+        <textarea cols=40 rows=10 name="data{{loop.index}}"></textarea>
+    {%endfor%}
+        <p>地狱分析</p>
+        <a href="{{IPS1}}" target="_blank">跳转链接</a>
+        <p></p>
+        <textarea cols=40 rows=10 name="data5"></textarea>
+        <input type="submit" value="提交">
+    </form>
+
+{%endif%}
+
+</body>
+</html>

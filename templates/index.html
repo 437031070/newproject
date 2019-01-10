@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+   <script src="/static/js/jquery-1.11.3.js"></script>
+    <script src="http://echarts.baidu.com/dist/echarts.min.js"></script>
+    <script>
+        $(function(){
+            $("#btn").click(function(){
+                var shuju1=$("#zss").val()
+                var xiala=$("#lesion").val()
+                $.ajax({
+                    url:'/index',
+                    type:'post',
+                    data:{shuju:shuju1,xiala:xiala},
+                    dataType:'json',
+                    success:function(data){
+                        str = ""
+                        $.each(data,function(i,obj){
+                            console.log(obj.encryption_index,obj.True_value)
+                            str += "<tr>"
+                            str += "<td>"+obj.encryption_index+"</td>"
+                            str += "<td>"+obj.True_value+"</td>"
+                            str += "</tr>"
+                            $("#reduct").html(str)
+                        })
+                    }
+                })
+            })
+        })
+    </script>
+
+<style>
+    .divcss5{width:270px;height:300px;border:1px solid black}
+</style>
+<body>
+ <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+
+    <h2>
+        <a href="/gn1">类目采集</a>
+    </h2>
+    <h2>
+        <a href="/gn3">市场大盘</a>
+    </h2>
+    <h2>
+        <a href="/hn">市场排行</a>
+    </h2>
+    <h2>
+        <a href="/Attribute">热门属性</a>
+    </h2>
+    <h2>
+        <a href="/Search_area">搜索排行</a>
+    </h2>
+    <h2>
+        <a href="/Analysis">搜索分析</a>
+    </h2>
+    <h2>
+        <a href="/Race_shop">竞店分析</a>
+    </h2>
+    <h2>
+        <a href="/Competing_goods">竞品分析</a>
+    </h2>
+    <h2>
+        <a href="/Competing_goods2">竞品分析2</a>
+    </h2>
+    <h2>
+        <a href="/brand">竞品牌分析</a>
+    </h2>
+    <h2>
+        <a href="/Industry_trends_map">行业趋势</a>
+    </h2>
+<p>---------------------------测试----------------------------------</p>
+ <form action="/test" method="post">
+     <input type="text" name="test">
+     <input type="submit" value="提交">
+ </form>
+<p>----------------------------------------------------------------</p>
+    <form action="/index" method="post" id="formid">
+        <h3>要还原的指数</h3>
+        <textarea id="zss" cols=30 rows=10 name="encryption_index"></textarea>
+        <p></p>
+        <select name="func" id="lesion">
+            <option value="交易指数">交易指数</option>
+            <option value="其他指数">其他指数</option>
+            <option value="转化率指数">转化率指数</option>
+        </select>
+        <button id="btn" type="button">指数还原</button>
+    </form>
+    <div class="divcss5" id="reduction">
+        <table border="1">
+            <thead>
+                <tr>
+                <td>指数</td>
+                <td>真实值</td>
+                </tr>
+            </thead>
+            <tbody id="reduct">
+
+            </tbody>
+
+        </table>
+    </div>
+
+</body>
+</html>

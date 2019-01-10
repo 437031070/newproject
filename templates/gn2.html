@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<link href="static/css/style.css" rel="stylesheet" type="text/css"/>
+    <script>
+
+    </script>
+</head>
+<a href="/index">返回首页</a>
+<body>
+
+    <div id="d1">
+
+        <form action="/gn3" method="post">
+            <p id="v1">请输入cateId</p>
+        <input type="text" name="cateId" id="c1" value="{{cateid}}">
+              <p>
+                <input type="submit" value="提交" id="x1">
+            </p>
+        <select name="Industry_type" id="q1">
+                <option>行业交易构成</option>
+                <option>卖家分布</option>
+        </select>
+
+        </form>
+
+    </div>
+{%if ips and dates%}
+    <div>
+        <form action="/gn3" method="post">
+            {% for x in ips%}
+                <p></p>
+                <input name="time{{loop.index}}" value="{{x}}">
+                <p></p>
+                <a href="{{ips[x]}}" target="_blank">跳转链接</a>
+                <p></p>
+                <textarea cols=40 rows=10 name="data{{loop.index}}"></textarea>
+            {%endfor%}
+            <div style="display: none"><input type="text" name="cateId"value="{{cateid}}"></div>
+            <div style="display: none"><input type="text" name="Industry_type"value="{{Industry_type}}"></div>
+
+            <input type="submit" value="提交">
+         </form>
+    </div>
+{%endif%}
+</body>
+</html>

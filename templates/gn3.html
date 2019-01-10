@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<link href="static/css/style.css" rel="stylesheet" type="text/css"/>
+    <script src="/static/js/jquery-1.11.3.js"></script>
+    <script>
+        $(function(){
+            $("#one_type").click(function(){
+                var data1 = $("#one_type").val()
+                $.ajax({
+                    url:'/xl_qz',
+                    type:'post',
+                    data:{data1:data1},
+                    dataType:'text',
+                    success:function(data){
+                        $("#two_type").html(data)
+                    }
+                })
+            })
+        })
+    </script>
+</head>
+<body>
+<a href="/index">返回首页</a>
+    <div>
+
+        <form action="/hn" method="post">
+            <p id="v1">请输入cateId</p>
+        <input type="text" name="cateId" id="c1" value="{{cateid}}">
+              <p>
+                <input type="submit" value="提交" id="x1">
+            </p>
+
+            <select name="Industry_type2" class="q1" id="two_type">
+
+            </select>
+            <select name="Industry_type" class="q1" id="one_type">
+                <option>店铺</option>
+                <option>商品</option>
+                <option>品牌</option>
+            </select>
+        </form>
+
+    </div>
+{%if ips and dates%}
+    <div>
+        <form action="/hn" method="post">
+            {% for x in ips%}
+                <p></p>
+                <input name="time{{loop.index}}" value="{{x}}">
+                <p></p>
+                <a target="_blank" href="{{ips[x]}}">跳转链接</a>
+                <p></p>
+                <textarea cols=40 rows=10 name="data{{loop.index}}"></textarea>
+            {%endfor%}
+            <div style="display: none"><input type="text" name="cateId"value="{{cateid}}"></div>
+            <div style="display: none"><input type="text" name="Industry_type"value="{{Industry_type}}"></div>
+            <div style="display: none"><input type="text" name="Industry_type2"value="{{Industry_type2}}"></div>
+
+
+            <input type="submit" value="提交">
+         </form>
+    </div>
+{%endif%}
+</body>
+</html>

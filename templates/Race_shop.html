@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="/index">返回首页</a>
+<form action="/Race_shop" method="post" >
+    <input type="text" placeholder="请输入竞店IP" name="data2" value="{{shop_ip}}">
+    <select name="data3">
+            {%for date in dates%}
+                <option>{{date}}</option>
+            {%endfor%}
+    </select>
+    <input type="submit" value="提交">
+</form>
+{%if IPS%}
+    <form action="/addRace_shop" method="post">
+    {%for x in IPS%}
+        <p>{{x}}</p>
+        <p>{{date}}</p>
+        <a href="{{IPS[x]}}" target="_blank">链接</a>
+        <p></p>
+        <textarea cols=40 rows=10 name="x{{loop.index}}"></textarea>
+    {%endfor%}
+        <input type="submit" value="提交">
+    </form>
+{%endif%}
+</body>
+</html>

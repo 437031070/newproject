@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="/index">返回首页</a>
+<form action="/Competing_goods2" method="post">
+    <input type="text" placeholder="请输入竞品IP" name="IP">
+    <input type="submit" value="提交">
+</form>
+{%if data%}
+    <form action="/goods2" method="post">
+    {%for cow in data%}
+        <input name="time{{loop.index}}" {%for x in cow%} value="{{x}}" {%endfor%}>
+        <p></p>
+        <p><a {%for x in cow%} href="{{cow[x]}}" {%endfor%} target="_blank">跳转链接</a></p>
+        <p></p>
+        <textarea cols=40 rows=10 name="data{{loop.index}}"></textarea>
+        <p></p>
+
+    {%endfor%}
+        <input type="submit" value="提交">
+    </form>
+{%endif%}
+</body>
+</html>

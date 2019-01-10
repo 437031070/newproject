@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/static/js/jquery-1.11.3.js"></script>
+
+</head>
+<body>
+<a href="/index">返回首页</a>
+<form action="/gn1" method="post">
+    <p><input type="button" value="数据采集" onclick="window.open('https://sycm.taobao.com/mc/mq/monitor/offline/public.json?_=1544876804670&token=','_blank')"></p>
+
+    <p><textarea cols=40 rows=10 name="text"></textarea></p>
+    <input type="submit" value="提交" id="d1">
+
+</form>
+   {% if l  %}
+            {% for x in l %}
+                <p>{{x}}</p>
+            {% endfor %}
+    {% endif %}
+<form action="/gn2" method="post">
+
+    <p><textarea cols=40 rows=10 name="text2"></textarea></p>
+    <p><textarea cols=40 rows=10 name="text3"></textarea></p>
+    <p><textarea cols=40 rows=10 name="text4"></textarea></p>
+    {{lianjie}}
+    <p><textarea cols=40 rows=10 name="text5"></textarea></p>
+
+
+    <input type="submit" value="提交">
+</form>
+
+</body>
+</html>
+
+
+
+

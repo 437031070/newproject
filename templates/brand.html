@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="/index">返回首页</a>
+<form action="/brand" method="post" >
+    <input type="text" placeholder="请输入竞品牌IP" name="data2" value="{{Brand_ip}}">
+    <select name="data3">
+            {%if dates%}
+            {%for date in dates%}
+                <option>{{date}}</option>
+            {%endfor%}
+            {%else%}
+                <option>{{date}}</option>
+            {%endif%}
+    </select>
+    <input type="submit" value="提交">
+</form>
+
+{%if IPS%}
+<form action="/brand2" method="post">
+    {%for cow in IPS%}
+
+         <input {%for x in cow%} value="{{x}}"{%endfor%} name="date{{loop.index}}">
+        <p></p>
+         <a {%for x in cow%} href="{{cow[x]}}"{%endfor%} target="_blank">跳转链接</a>
+        <p></p>
+
+         <textarea cols=40 rows=10 name="knz{{loop.index}}"></textarea>
+        <p></p>
+
+    {%endfor%}
+    <input type="submit" value="提交">
+    </form>
+{%endif%}
+</body>
+</html>

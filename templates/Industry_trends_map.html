@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="/static/js/jquery-1.11.3.js"></script>
+ <script src="http://echarts.baidu.com/dist/echarts.min.js"></script>
+<script>
+    $(function(){
+        var myChart = echarts.init(document.getElementById('main'));
+        $("#c1").click(function(){
+        $.ajax({
+         url:"/Industry_trends_map",
+         type:"post",
+         dataType:"json",
+         success:function(data){
+                  //图表区域
+        var option = {
+        title: {
+        text: '市场定位',
+        subtext: '市场份额&竞争卖家占比'
+    },
+    legend: {
+        data:['市场份额','竞争卖家占比']
+    },
+    tooltip: {
+        trigger: 'axis'
+    },
+    xAxis:{
+        type: 'category',
+        data: data.date
+    },
+    toolbox: {
+        show: true,
+        feature: {
+        dataZoom: {
+        yAxisIndex: 'none'
+         },
+         dataView: {readOnly: false},
+         magicType: {type: ['line', 'bar']},
+         restore: {},
+         saveAsImage: {}
+        }
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: [{
+        name:'市场份额',
+        data: data.data1,
+        markPoint: {
+                data: [
+                    {type: 'max', name: '最大值'},
+                    {type: 'min', name: '最小值'}
+                ]
+            },
+        markLine: {
+                data: [
+                    {type: 'average', name: '平均值'}
+                ]
+            },
+        type: 'line',
+        smooth: true
+    },
+    {
+        name:'竞争卖家占比',
+        data: data.data2,
+         markPoint: {
+                data: [
+                    {type: 'max', name: '最大值'},
+                    {type: 'min', name: '最小值'}
+                ]
+            },
+        markLine: {
+                data: [
+                    {type: 'average', name: '平均值'}
+                ]
+            },
+        type: 'line',
+        smooth: true
+    }]
+};
+// 使用刚指定的配置项和数据显示图表。
+                myChart.setOption(option);
+//图表end
+
+
+
+
+
+
+
+
+
+
+
+
+}
+})
+})
+})
+</script>
+<body>
+    <a href="/index">返回首页</a>
+    <button id="c1">触发图表</button>
+    <div id="main" style="width:600px;height:400px;"></div>
+</body>
+</html>
